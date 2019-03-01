@@ -71,7 +71,7 @@ function UsersProvider(props) {
           .then(res => {
             localStorage.setItem("token", res.data.token);
             alert("Login was successful.");
-            window.location.href = "/";
+            window.location.href = "/jokes";
           })
           .catch(err => {
             alert("Login failed.");
