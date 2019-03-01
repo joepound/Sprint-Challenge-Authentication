@@ -21,12 +21,7 @@ module.exports = server => {
     validate(...log().loginVal).userCredentials,
     login
   );
-  server.get(
-    "/api/jokes",
-    log(log().jokeStart).start,
-    authenticate,
-    getJokes
-  );
+  server.get("/api/jokes", log(log().jokeStart).start, authenticate, getJokes);
 };
 
 async function register(req, res) {
@@ -35,7 +30,11 @@ async function register(req, res) {
 
   console.log("Proceeding to register the new user...");
   try {
-    //await registerUser
+    await db("Users").insert(userData);
+    res.status(201).json({
+      success: true,
+      data: { message: "User was successfully registered." }
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
@@ -44,19 +43,6 @@ async function register(req, res) {
     });
     console.log("User registration attempt finished.");
   }
-  dbHelper
-    .registerUser(userData)
-    .then(() => {
-      res.status(201).json({
-        success: true,
-        message: `User ${userData.UserName} has been registered.`
-      });
-      console.log("User registration attempt finished.");
-    })
-    .catch(err => {
-      sendError(res, 500, err);
-      console.log("User registration attempt finished.");
-    });
 }
 
 async function login(req, res) {
