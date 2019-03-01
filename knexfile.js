@@ -1,4 +1,5 @@
 // Update with your config settings.
+require('dotenv').config(); // load .env variables
 
 const pg = require("pg");
 pg.defaults.ssl = true;
