@@ -9,6 +9,12 @@ const { genToken, authenticate } = require("../auth/authenticate");
 const db = require("../database/dbConfig");
 
 module.exports = server => {
+  server.get(
+    "/api/auth",
+    authenticate,
+    (req, res) => res.sendStatus(204)
+  );
+
   server.post(
     "/api/register",
     log(log().regStart).start,

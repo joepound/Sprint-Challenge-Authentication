@@ -3,15 +3,15 @@ import { Route } from "react-router-dom";
 
 import { AppHeader } from "./components/AppHeader";
 
-// import { LoginPage } from "./views/Login";
-// import { RegistrationPage } from "./views/Registration";
-// import { UserlistPage } from "./views/Userlist";
+import { LoginPage } from "./views/Login";
+import { RegistrationPage } from "./views/Registration";
+import { JokelistPage } from "./views/Jokelist";
 
 function App(props) {
   return (
     <div className="jokelist">
       <AppHeader />
-      {/* <Route exact path="/" render={props => <LoginPage {...props} />} />
+      <Route exact path="/" render={props => <LoginPage {...props} />} />
       <Route exact path="/signin" render={props => <LoginPage {...props} />} />
       <Route
         exact
@@ -20,9 +20,9 @@ function App(props) {
       />
       <Route
         exact
-        path="/users"
-        render={props => <UserlistPage {...props} />}
-      /> */}
+        path="/jokes"
+        render={props => <JokelistPage {...props} />}
+      />
     </div>
   );
 }
