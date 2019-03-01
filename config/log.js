@@ -7,6 +7,7 @@ module.exports = function(msg) {
 
     regStart: "\nAttempting to register new user...",
     loginStart: "\nAttempting login...",
+    jokeStart: "\nAttempting to fetch jokes...",
 
     regVal: [
       "Checking if all required fields for registration were supplied...",

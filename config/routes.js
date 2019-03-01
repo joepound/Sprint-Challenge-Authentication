@@ -6,6 +6,8 @@ const validate = require("../errors/bodyValidator");
 const sqlErrors = require("../errors/sqlErrorList");
 const { authenticate } = require("../auth/authenticate");
 
+const db = require("../database/dbConfig");
+
 module.exports = server => {
   server.post(
     "/api/register",
@@ -19,7 +21,12 @@ module.exports = server => {
     validate(...log().loginVal).userCredentials,
     login
   );
-  server.get("/api/jokes", authenticate, getJokes);
+  server.get(
+    "/api/jokes",
+    log(log().jokeStart).start,
+    authenticate,
+    getJokes
+  );
 };
 
 async function register(req, res) {
@@ -30,7 +37,12 @@ async function register(req, res) {
   try {
     //await registerUser
   } catch (err) {
-    console.log;
+    res.status(500).json({
+      success: false,
+      code: 500,
+      errorInfo: err.errno ? sqlErrors[err.errno] : err.toString()
+    });
+    console.log("User registration attempt finished.");
   }
   dbHelper
     .registerUser(userData)
@@ -59,9 +71,18 @@ function getJokes(req, res) {
   axios
     .get("https://icanhazdadjoke.com/search", requestOptions)
     .then(response => {
-      res.status(200).json(response.data.results);
+      res.status(200).json({
+        success: true,
+        data: response.data.results
+      });
+      console.log("Finished attempt on fetching Jokes");
     })
     .catch(err => {
-      res.status(500).json({ message: "Error Fetching Jokes", error: err });
+      res.status(500).json({
+        success: false,
+        code: 500,
+        errorInfo: err.errno ? sqlErrors[err.errno] : err.toString()
+      });
+      console.log("Finished attempt on fetching Jokes");
     });
 }
