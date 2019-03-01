@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const log = require("./log");
 const validate = require("../errors/bodyValidator");
 const sqlErrors = require("../errors/sqlErrorList");
-const { authenticate } = require("../auth/authenticate");
+const { genToken, authenticate } = require("../auth/authenticate");
 
 const db = require("../database/dbConfig");
 
@@ -45,8 +45,50 @@ async function register(req, res) {
   }
 }
 
+// Login token currently set to expire in 1 minute
 async function login(req, res) {
-  // implement user login
+  const userData = req.body
+
+  console.log("Retrieving user information records...");
+  try {
+    const userMatch = await db("Users").where({ UserName: userData.UserName }).first();
+
+    console.log("Checking if user exists...");
+    if (userMatch) {
+      console.log("Checking if correct password was supplied...");
+      if (bcrypt.compareSync(userData.UserPassword, userMatch.UserPassword)) {
+        console.log("Setting up token...");
+        const token = await genToken(userMatch);
+
+        res.status(200).json({
+          success: true,
+          message: `Login for user ${userData.UserName} was successful.`,
+          token
+        });
+      } else {
+        res.status(401).json({
+          success: false,
+          code: 500,
+          errorInfo: "Invalid credentials."
+        });
+      }
+    } else {
+      res.status(401).json({
+        success: false,
+        code: 500,
+        errorInfo: "Invalid credentials."
+      });
+    }
+
+    console.log("User login attempt finished.");
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      code: 500,
+      errorInfo: err.errno ? sqlErrors[err.errno] : err.toString()
+    });
+    console.log("User login attempt finished.");
+  }
 }
 
 function getJokes(req, res) {
