@@ -1,0 +1,18 @@
+.error {
+  &__heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1.5;
+    animation: expand 1s;
+  }
+
+  &__redirect-msg {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 2rem;
+    border-right: 0.5rem solid transparent;
+    margin: 25px 0  50px;
+    animation: typing__reveal 1.75s 2s steps(25, end) backwards, typing__cursor-blink 875ms 1.25s infinite;
+  }
+}

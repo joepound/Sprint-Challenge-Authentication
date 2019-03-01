@@ -7,14 +7,6 @@
   }
 }
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 @keyframes float-up {
   from {
     opacity: 0;
@@ -25,5 +17,33 @@
     opacity: 1;
     -webkit-transform: translateY(0);
     transform: translateY(0);
+  }
+}
+
+@keyframes expand {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes typing__reveal {
+  from {
+    width: 0;
+  }
+  to {
+    width: 27.3rem;
+  }
+}
+
+@keyframes typing__cursor-blink {
+  from,
+  to {
+    border-color: black;
+  }
+  50% {
+    border-color: transparent;
   }
 }

@@ -45,7 +45,7 @@ function UsersProvider(props) {
           .post(`${baseURL}/register`, userData)
           .then(res => {
             alert("User registration successful.");
-            // window.location.href = "/";
+            window.location.href = "/";
           })
           .catch(err => {
             alert("An error occurred in user registration.");
