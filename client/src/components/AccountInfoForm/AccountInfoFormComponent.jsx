@@ -71,7 +71,7 @@ function AccountInfoForm(props) {
           className="jokelist__account-info-form__buttons__submit"
           type="submit"
         >
-          Submit
+          {props.submit || "Submit"}
         </button>
         <button
           className="jokelist__account-info-form__buttons__clear"

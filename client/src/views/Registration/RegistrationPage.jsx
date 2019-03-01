@@ -12,7 +12,7 @@ function RegistrationPage(props) {
 
   return (
     <main className="jokelist__registration">
-      <AccountInfoForm {...props} action={register} />
+      <AccountInfoForm {...props} action={register} submit="Register" />
       <div className="jokelist__registration__login-link">
         <Link to="/">Back to login</Link>
       </div>

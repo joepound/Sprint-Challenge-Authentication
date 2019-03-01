@@ -1,0 +1,42 @@
+.jokelist__container {
+  &__list {
+    overflow: auto;
+    height: 425px;
+    padding: 20px 5%;
+    border: 5px double grey;
+    border-radius: 5px;
+    animation: 1.5s fade-in;
+
+    &__item {
+      font-size: 1.6rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      animation: 2s fade-in;
+    }
+  }
+
+  &__logout-btn {
+    display: block;
+    width: 150px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    background-color: $submit-user-info-btn-bg-color;
+    color: $user-info-btn-font-color;
+    text-shadow: 0.5px 0.5px 0.5px black;
+    cursor: pointer;
+    padding: 8.75px 0;
+    margin: 43.75px auto 0;
+    transition: filter 250ms;
+
+    &:hover {
+      filter: brightness(110%);
+      transition: all 250ms;
+    }
+
+    &:active {
+      filter: brightness(87.5%);
+      text-shadow: 0.1px 0.1px 0.1px black;
+      transition: none;
+    }
+  }
+}

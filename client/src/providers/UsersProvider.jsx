@@ -26,12 +26,7 @@ function UsersProvider(props) {
     jokes,
 
     authenticate() {
-      let isAuthenticated;
-      axios
-        .get(`${baseURL}/auth`, getAuthToken())
-        .then(() => isAuthenticated = true)
-        .catch(() => isAuthenticated = false);
-      return isAuthenticated; 
+      return axios.get(`${baseURL}/auth`, getAuthToken());
     },
 
     register(e) {
@@ -44,13 +39,13 @@ function UsersProvider(props) {
       } else {
         const userData = {
           UserName: usernameInput,
-          UserPassword: passwordInput,
+          UserPassword: passwordInput
         };
         axios
           .post(`${baseURL}/register`, userData)
           .then(res => {
             alert("User registration successful.");
-            window.location.href = "/";
+            // window.location.href = "/";
           })
           .catch(err => {
             alert("An error occurred in user registration.");
@@ -89,17 +84,19 @@ function UsersProvider(props) {
     getJokes() {
       axios
         .get(`${baseURL}/jokes`, getAuthToken())
-        .then(res => setJokes(res.data))
+        .then(res => setJokes(res.data.data))
         .catch(err => {
           setJokes(null);
-          alert("You must log in to view this content.");
           console.log(err);
+          alert("You must log in to view this content.");
+          window.location.href = "/";
         });
     },
 
     logout() {
       localStorage.setItem("token", "");
       alert("Logout was successful.");
+      window.location.href = "/";
     },
 
     handleTextInputChange(e) {

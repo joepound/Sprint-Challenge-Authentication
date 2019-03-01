@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Switch, Route  } from "react-router-dom";
 
 import { AppHeader } from "./components/AppHeader";
 
@@ -11,18 +11,20 @@ function App(props) {
   return (
     <div className="jokelist">
       <AppHeader />
-      <Route exact path="/" render={props => <LoginPage {...props} />} />
-      <Route exact path="/signin" render={props => <LoginPage {...props} />} />
-      <Route
-        exact
-        path="/signup"
-        render={props => <RegistrationPage {...props} />}
-      />
-      <Route
-        exact
-        path="/jokes"
-        render={props => <JokelistPage {...props} />}
-      />
+      <Switch>
+        <Route exact path="/" render={props => <LoginPage {...props} />} />
+        <Route exact path="/signin" render={props => <LoginPage {...props} />} />
+        <Route
+          exact
+          path="/signup"
+          render={props => <RegistrationPage {...props} />}
+        />
+        <Route
+          exact
+          path="/jokes"
+          render={props => <JokelistPage {...props} />}
+        />
+      </Switch>
     </div>
   );
 }
