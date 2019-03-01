@@ -9,8 +9,8 @@ function UsersProvider(props) {
 
   const [jokes, setJokes] = useState(null);
 
-  const baseURL = "http://localhost:5000/api";
-  // const baseURL = "https://joepound-ls-auth-sprint.herokuapp.com/api";
+  // const baseURL = "http://localhost:5000/api"; // For testing
+  const baseURL = "https://joepound-ls-auth-sprint.herokuapp.com/api";
   const getAuthToken = () => ({
     headers: { Authorization: localStorage.getItem("token") }
   });
